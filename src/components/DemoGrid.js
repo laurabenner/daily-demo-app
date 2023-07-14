@@ -5,7 +5,7 @@ import { ExhibitHeading } from "./ExhibitHeading";
 import { DemoNoExhibit } from "./DemoNoExhibit";
 import { transformTimeString } from "../utils";
 
-export function DemoGrid({ filterExhibit, sort }) {
+export function DemoGrid({ filterExhibit, sort, updateFavorites }) {
     const copyDemos = [...demoData];
 
     function demoFilter(demo) {
@@ -42,12 +42,12 @@ export function DemoGrid({ filterExhibit, sort }) {
                             return (
                                 <Fragment key={demo.Exhibit}>
                                     <ExhibitHeading exhibit={demo.Exhibit} />
-                                    <DemoNoExhibit demo={demo} />
+                                    <DemoNoExhibit demo={demo} updateFavorites={updateFavorites}/>
                                 </Fragment>
                             );
                         } else {
                             return (
-                                <DemoNoExhibit key={demo.Time + demo.Exhibit} demo={demo} />
+                                <DemoNoExhibit key={demo.Time + demo.Exhibit} demo={demo} updateFavorites={updateFavorites}/>
                             );
                         }
                     })
@@ -63,7 +63,7 @@ export function DemoGrid({ filterExhibit, sort }) {
             <section className="demo-grid grid">
                 {filteredDemos.length > 0 ? (
                     filteredDemos.map((demo) => (
-                        <Demo key={demo.Time + demo.Exhibit} demo={demo} />
+                        <Demo key={demo.Time + demo.Exhibit} demo={demo} updateFavorites={updateFavorites}/>
                     ))
                 ) : (
                     <p className="text-center pt-4">Sorry, no demos in this exhibit today.</p>

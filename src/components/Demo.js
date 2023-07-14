@@ -7,11 +7,15 @@ import { Star } from "./Star";
 import { AnimalList } from "./AnimalList";
 import { AnimalDropdown } from "./AnimalDropdown";
 
-export function Demo({ demo }) {
+export function Demo({ demo, updateFavorites }) {
     const [animal, setAnimal] = useState("");
 
     const updateAnimal = (newAnimal) => {
-        setAnimal(newAnimal);
+        if (newAnimal === animal) {
+            setAnimal("");
+        } else {
+            setAnimal(newAnimal);
+        }
     }
 
     let animals = [];
@@ -27,11 +31,11 @@ export function Demo({ demo }) {
             >
                 <Time time={demo.Time} />
                 <Description description={demo.Demo} />
-                <Star />
+                <Star onClick={updateFavorites} demo={demo}/>
                 <Exhibit exhibit={demo.Exhibit} />
                 {animals.length > 0 && <AnimalList animals={animals} exhibit={demo.Exhibit} updateAnimal={updateAnimal} />}
             </div>
-            {animal && <AnimalDropdown animal={animal} />}
+            {animal && <AnimalDropdown animal={animal} updateAnimal={updateAnimal}/>}
         </div>
     );
 }

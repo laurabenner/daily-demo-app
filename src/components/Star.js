@@ -1,10 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
+import { useState } from "react";
+import { faStar as regularFaStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar as solidFaStar } from "@fortawesome/free-solid-svg-icons";
 
-export function Star() {
+export function Star({ onClick, demo }) {
+    const [favorited, setFavorited] = useState("false")
+
+    const handleClick = () => {
+        onClick(demo);
+        setFavorited(!favorited);
+    };
+
     return (
         <div className="col-start-12 col-span-1 row-span-1 text-right px-2.5">
-            <FontAwesomeIcon icon={faStar} />
+            <button onClick={handleClick}>
+                {favorited ? <FontAwesomeIcon icon={regularFaStar} /> : <FontAwesomeIcon icon={solidFaStar} />}
+            </button>
         </div>
     );
 }

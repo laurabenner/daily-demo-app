@@ -14,8 +14,6 @@ export function AnimalList({ animals, exhibit, updateAnimal }) {
             <FontAwesomeIcon icon={faPaw} />
             <p className="inline p-1.5">
                 {animals.map((animal, index) => {
-                    console.log(animal.label + (index < animals.length - 1 ? ", " : ""));
-
                     return (
                         <span key={animal.label}>
                             <button

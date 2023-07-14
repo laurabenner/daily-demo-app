@@ -59,3 +59,16 @@ export function getAnimalUrl(animal) {
 export function findAnimal(animal) {
     return animals.find(thisAnimal => thisAnimal.label === animal);
 }
+
+export function spliceTags(string) {
+    var pattern = /<!--[\s\S]*?-->|<[^>]+>/g;
+    var result = string.replace(pattern, '');
+    return result;
+}
+
+export function cutSentences(string) {
+    var pattern = /[^.!?]+[.!?]+/g;
+    var sentences = string.match(pattern);
+    var result = sentences.slice(0, 2).join(' ');
+    return result;
+}

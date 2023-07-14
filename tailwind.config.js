@@ -10,11 +10,23 @@ module.exports = {
         {
           pattern: /^bg-/,
         },
+        {
+          pattern: /^from-/,
+        },
+        {
+          pattern: /^via-/,
+        },
+        {
+          pattern: /^to-/,
+        },
       ],
     },
   },
   theme: {
     extend: {
+      borderRadius: {
+        'big': '40px',
+      },
       fontFamily: {
         poppins: ['Poppins', 'system-ui', 'sans-serif'],
       },

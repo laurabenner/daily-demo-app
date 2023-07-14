@@ -6,6 +6,7 @@ import { Select } from "./components/Select";
 function App() {
   const [filterExhibit, setFilterExhibit] = useState("All Exhibits");
   const [sort, setSort] = useState("Time");
+  const [favorites, setFavorites] = useState([]);
 
   const updateFilterExhibit = (newValue) => {
     setFilterExhibit(newValue);
@@ -15,8 +16,22 @@ function App() {
     setSort(newValue);
   };
 
+  const updateFavorites = (favorite) => {
+    const index = favorites.indexOf(favorite);
+
+    if (index !== -1) {
+      const updatedFavorites = [...favorites];
+      updatedFavorites.splice(index, 1);
+      setFavorites(updatedFavorites);
+    } else {
+      const updatedFavorites = [...favorites, favorite];
+      setFavorites(updatedFavorites);
+    }
+    console.log(favorites);
+  };
+
   return (
-   
+
     <div className="font-poppins">
       <header className="text-center bg-asia-trail py-4 md:pt-24 md:pb-10">
         <h1 className="text-white text-3xl">Daily Animal Demos</h1>
@@ -30,6 +45,7 @@ function App() {
         <DemoGrid
           filterExhibit={filterExhibit}
           sort={sort}
+          updateFavorites={updateFavorites}
         />
       </article>
 
