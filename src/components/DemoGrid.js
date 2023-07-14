@@ -4,13 +4,12 @@ import { Fragment } from "react";
 import { ExhibitHeading } from "./ExhibitHeading";
 import { DemoNoExhibit } from "./DemoNoExhibit";
 import { transformTimeString } from "../utils";
-import { transformExhibitString } from "../utils";
 
 export function DemoGrid({ filterExhibit, sort }) {
     const copyDemos = [...demoData];
 
     function demoFilter(demo) {
-        return (transformExhibitString(demo.Exhibit) === filterExhibit || filterExhibit === "all");
+        return (demo.Exhibit.toLowerCase() === filterExhibit.toLowerCase() || filterExhibit === "All Exhibits");
     }
 
     function exhibitSort(demoA, demoB) {
@@ -30,7 +29,7 @@ export function DemoGrid({ filterExhibit, sort }) {
         return dateA - dateB;
     };
 
-    if (sort === 'Exhibit') {
+    if (sort === 'Sort By Exhibit') {
         copyDemos.sort(exhibitSort);
         const filteredDemos = copyDemos.filter(demoFilter);
         let lastExhibit = "";

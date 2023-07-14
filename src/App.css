@@ -13,6 +13,7 @@ select {
   background-repeat: no-repeat;
 }
 
+/**
 @media (min-width: 1024px) {
   .demo {
       height: 100px;
@@ -24,3 +25,4 @@ select {
       height: 280px;
   }
 }
+*/

@@ -4,39 +4,89 @@ module.exports = {
     content: ['./src/**/*.js'],
     options: {
       safelist: [
-        'text-elephant-trails',
-        'text-american-bison',
-        'text-bird-house',
-        'text-amazonia',
-        'text-small-mammal-house',
-        'text-africa-trail',
-        'text-primates',
-        'text-reptile-discovery-center',
-        'text-american-trail',
-        'text-asia-trail',
-        'text-great-cats',
-        'text-kids-farm',
-        'text-claws-paws-pathway'
+        {
+          pattern: /^text-/,
+        },
+        {
+          pattern: /^bg-/,
+        },
       ],
     },
   },
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'system-ui', 'sans-serif'],
+      },
       colors: {
-        "elephant-trails": "#3590f3",
-        "american-bison": "#4f0c63",
-        "bird-house": "#5b8f6e",
-        "amazonia": "#F26419",
-        "small-mammal-house": "#87B37A",
-        "africa-trail": "#2F4858",
-        "primates": "#F6AE2D",
-        "reptile-discovery-center": "#987175",
-        "american-trail": "#06893C",
-        "asia-trail": "#084C61",
-        "great-cats": "#F7ACCF",
-        "kids-farm": "#C62606",
-        "claws-paws-pathway": "#4CB5AE",
-        "demo": "#FBF7EF",
+        "elephant-trails": {
+          DEFAULT: "#3590f3",
+          dark: "#08488c",
+          light: "#d7e8ff"
+        },
+        "american-bison": {
+          DEFAULT: "#4f0c63",
+          dark: "#290631",
+          light: "#e9a3c8"
+        },
+        "bird-house": {
+          DEFAULT: "#5b8f6e",
+          dark: "#2d5b47",
+          light: "#e5f2e0"
+        },
+        "amazonia": {
+          DEFAULT: "#F26419",
+          dark: "#a13407",
+          light: "#fbe8d5"
+        },
+        "small-mammal-house": {
+          DEFAULT: "#87B37A",
+          dark: "#405d37",
+          light: "#f1f8e5"
+        },
+        "africa-trail": {
+          DEFAULT: "#2F4858",
+          dark: "#0f1924",
+          light: "#c8d8e1"
+        },
+        "primates": {
+          DEFAULT: "#F6AE2D",
+          dark: "#8b5e06",
+          light: "#fdf4cd"
+        },
+        "reptile-discovery-center": {
+          DEFAULT: "#987175",
+          dark: "#583a31",
+          light: "#f4eae2"
+        },
+        "american-trail": {
+          DEFAULT: "#06893C",
+          dark: "#03471e",
+          light: "#a0f6b1"
+        },
+        "asia-trail": {
+          DEFAULT: "#084C61",
+          dark: "#032c3d",
+          light: "#a8d9e7"
+        },
+        "great-cats": {
+          DEFAULT: "#F7ACCF",
+          dark: "#b15c7f",
+          light: "#fdf0f6"
+        },
+        "kids-farm": {
+          DEFAULT: "#C62606",
+          dark: "#841904",
+          light: "#f8a79d"
+        },
+        "claws-paws-pathway": {
+          DEFAULT: "#4CB5AE",
+          dark: "#1c736f",
+          light: "#dbf4f3"
+        },
+        "demo": {
+          DEFAULT: "#FBF7EF",
+        },
       },
     },
   },
