@@ -1,10 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useEffect } from "react";
 import { faStar as regularFaStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solidFaStar } from "@fortawesome/free-solid-svg-icons";
 
 export function Star({ onClick, demo, favorites }) {
-    const [favorited, setFavorited] = useState(favorites.includes(demo) ? true : false)
+    const [favorited, setFavorited] = useState(favorites.includes(demo))
+
+    useEffect(() => {
+        setFavorited(favorites.includes(demo));
+      }, [favorites, demo]);
 
     const handleClick = () => {
         onClick(demo);
