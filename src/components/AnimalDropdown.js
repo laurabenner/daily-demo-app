@@ -8,7 +8,7 @@ import { cutSentences } from "../utils";
 export function AnimalDropdown({ animal, updateAnimal }) {
     const darkColorClass = "bg-" + transformExhibitString(animal.exhibit_label) + "-dark";
     const lightColorClass = "text-" + transformExhibitString(animal.exhibit_label) + "-light";
-    const defaultColorClass = "bg-" + transformExhibitString(animal.exhibit_label);
+    const defaultColorClass = "border-" + transformExhibitString(animal.exhibit_label);
 
     function handleClick() {
         updateAnimal("");
@@ -16,7 +16,7 @@ export function AnimalDropdown({ animal, updateAnimal }) {
 
     return (
         <div className={"justify-self-end w-9/12 sm:w-10/12 p-4 border rounded-b-big border-transparent text-white bg-gradient-to-t " + darkColorClass}>
-            <div className={"w-24 h-24 mr-2.5 float-left rounded-full " + defaultColorClass}></div>
+            <img className={"w-24 h-24 mr-2.5 float-left border-4 rounded-full object-cover " + defaultColorClass} src={animal.thumbnail} alt={animal.label}></img>
             <p className="text-lg inline">{animal.label}</p>
             <button onClick={handleClick} className="float-right inline">
                 <FontAwesomeIcon icon={faXmark} />

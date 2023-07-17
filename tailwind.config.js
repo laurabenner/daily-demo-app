@@ -11,14 +11,8 @@ module.exports = {
           pattern: /^bg-/,
         },
         {
-          pattern: /^from-/,
-        },
-        {
-          pattern: /^via-/,
-        },
-        {
-          pattern: /^to-/,
-        },
+          pattern: /^border-/
+        }
       ],
     },
   },

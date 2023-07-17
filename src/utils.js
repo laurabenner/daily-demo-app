@@ -61,9 +61,16 @@ export function findAnimal(animal) {
 }
 
 export function spliceTags(string) {
-    var pattern = /<!--[\s\S]*?-->|<[^>]+>/g;
-    var result = string.replace(pattern, '');
-    return result;
+    let plaintext = string.replace(/&amp;/g, "&")
+        .replace(/&nbsp;/g, " ")
+        .replace(/&quot;/g, '"')
+        .replace(/&apos;/g, "'")
+        .replace(/&#039;/g, "'")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&rsquo;/g, "’")
+        .replace(/<[^>]+>/g, "");
+    return plaintext;
 }
 
 export function cutSentences(string) {
