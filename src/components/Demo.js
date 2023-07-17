@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { findAnimal } from "../utils";
 import { Time } from "./Time";
-import { Exhibit } from "./Exhibit";
 import { Description } from "./Description";
 import { Star } from "./Star";
-import { AnimalList } from "./AnimalList";
+import { IconBox } from "./IconBox";
 import { AnimalDropdown } from "./AnimalDropdown";
 
 export function Demo({ demo, updateFavorites }) {
@@ -32,8 +31,7 @@ export function Demo({ demo, updateFavorites }) {
                 <Time time={demo.Time} />
                 <Description description={demo.Demo} />
                 <Star onClick={updateFavorites} demo={demo}/>
-                <Exhibit exhibit={demo.Exhibit} />
-                {animals.length > 0 && <AnimalList animals={animals} exhibit={demo.Exhibit} updateAnimal={updateAnimal} />}
+                <IconBox exhibit={demo.Exhibit} animals={animals} updateAnimal={updateAnimal} />
             </div>
             {animal && <AnimalDropdown animal={animal} updateAnimal={updateAnimal}/>}
         </div>

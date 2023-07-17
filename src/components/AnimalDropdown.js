@@ -15,24 +15,23 @@ export function AnimalDropdown({ animal, updateAnimal }) {
     }
 
     return (
-        <div className={"justify-self-end w-9/12 sm:w-10/12 p-4 border rounded-b-big border-transparent text-white bg-gradient-to-t " + darkColorClass}>
-            <img className={"w-24 h-24 mr-2.5 float-left border-4 rounded-full object-cover " + defaultColorClass} src={animal.thumbnail} alt={animal.label}></img>
-            <p className="text-lg inline">{animal.label}</p>
-            <button onClick={handleClick} className="float-right inline">
+        <div className={"justify-self-end w-9/12 sm:w-10/12 grid grid-cols-9 sm:grid-cols-10 p-4 border rounded-b-big border-transparent text-white " + darkColorClass}>
+            <img className={"w-24 h-24 mr-2.5 col-start-1 col-span-3 sm:col-span-2 row-span-2 justify-self-center border-4 rounded-full object-cover " + defaultColorClass} src={animal.thumbnail} alt={animal.label}></img>
+            <p className="col-start-4 px-1 sm:col-start-3 col-end-10 text-lg">{animal.label}</p>
+            <button onClick={handleClick} className="col-start-10 text-right px-2.5">
                 <FontAwesomeIcon icon={faXmark} />
             </button>
-            <br></br>
-            <p className={"text-demo inline " + lightColorClass}>{cutSentences(spliceTags(animal.description))}</p>
-            <div className="inline">
+            <p className={"text-demo px-1 col-start-4 sm:col-start-3 col-end-10 " + lightColorClass}>
+                {cutSentences(spliceTags(animal.description))}
                 <a
-                    className="underline p-2.5"
+                    className="underline px-1"
                     href={animal.path}
                     target="_blank"
                     rel="noreferrer">
                     Read more
                 </a>
                 <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-            </div>
+            </p>
         </div>
     );
 }
