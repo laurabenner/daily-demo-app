@@ -6,11 +6,15 @@ import { Description } from "./Description";
 import { Star } from "./Star";
 import { IconBox } from "./IconBox";
 
-export function DemoNoExhibit({ demo, updateFavorites }) {
+export function DemoNoExhibit({ demo, updateFavorites, favorites }) {
     const [animal, setAnimal] = useState("");
 
     const updateAnimal = (newAnimal) => {
-        setAnimal(newAnimal);
+        if (newAnimal === animal) {
+            setAnimal("");
+        } else {
+            setAnimal(newAnimal);
+        }
     }
 
     let animals = [];
@@ -27,10 +31,10 @@ export function DemoNoExhibit({ demo, updateFavorites }) {
             >
                 <Time time={demo.Time} />
                 <Description description={demo.Demo} />
-                <Star onClick={updateFavorites} demo={demo}/>
+                <Star onClick={updateFavorites} demo={demo} favorites={favorites}/>
                 <IconBox exhibit={demo.Exhibit} animals={animals} updateAnimal={updateAnimal} showExhibit={false}/>
             </div>
-            {animal && <AnimalDropdown animal={animal} />}
+            {animal && <AnimalDropdown animal={animal} updateAnimal={updateAnimal}/>}
         </div>
     );
 }

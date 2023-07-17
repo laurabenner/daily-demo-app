@@ -53,8 +53,6 @@ export function IconBox({ animals, exhibit, updateAnimal, showExhibit }) {
                                     <button
                                         onClick={() => handleClick(animal)}
                                         className="hover:underline mr-1 hidden md:inline"
-                                        target="_blank"
-                                        rel="noreferrer"
                                     >
                                         {animal.label + (index < animals.length - 1 ? ", " : "")}
                                     </button>
