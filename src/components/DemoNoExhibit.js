@@ -28,7 +28,7 @@ export function DemoNoExhibit({ demo, updateFavorites }) {
                 <Time time={demo.Time} />
                 <Description description={demo.Demo} />
                 <Star onClick={updateFavorites} demo={demo}/>
-                <IconBox exhibit={demo.Exhibit} animals={animals} updateAnimal={updateAnimal} />
+                <IconBox exhibit={demo.Exhibit} animals={animals} updateAnimal={updateAnimal} showExhibit={false}/>
             </div>
             {animal && <AnimalDropdown animal={animal} />}
         </div>

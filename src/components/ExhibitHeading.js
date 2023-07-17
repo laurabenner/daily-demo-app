@@ -7,7 +7,7 @@ export function ExhibitHeading({ exhibit }) {
 
     return (
         <div className={"mt-4 ml-6 w-11/12 lg:w-4/6 justify-self-center text-2xl font-bold " + exhibitColorClass}>
-            <h2 className="inline-block">
+            <h2 className="block sm:inline-block">
                 <a
                     className={"hover:underline"}
                     href={"https://nationalzoo.si.edu/animals/exhibits/"
@@ -17,7 +17,7 @@ export function ExhibitHeading({ exhibit }) {
                     {exhibit}
                 </a>
             </h2>
-            <p className="text-gray-400 mr-2.5 text-base font-normal inline-block float-right">
+            <p className="text-gray-400 mr-2.5 text-base font-normal inline-block sm:float-right">
                 <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                 <a
                     className={"hover:underline p-2.5"}
