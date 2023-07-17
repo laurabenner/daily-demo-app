@@ -19,15 +19,19 @@ function App() {
   };
 
   const updateFavorites = (favorite) => {
-    const index = favorites.indexOf(favorite);
-
-    if (index !== -1) {
-      const updatedFavorites = [...favorites];
-      updatedFavorites.splice(index, 1);
-      setFavorites(updatedFavorites);
+    if (favorite === "clear") {
+      setFavorites([]);
     } else {
-      const updatedFavorites = [...favorites, favorite];
-      setFavorites(updatedFavorites);
+      const index = favorites.indexOf(favorite);
+
+      if (index !== -1) {
+        const updatedFavorites = [...favorites];
+        updatedFavorites.splice(index, 1);
+        setFavorites(updatedFavorites);
+      } else {
+        const updatedFavorites = [...favorites, favorite];
+        setFavorites(updatedFavorites);
+      }
     }
   };
 
@@ -62,7 +66,7 @@ function App() {
         <footer className="m-4"></footer>
       </div>
 
-      <Popper popped={popped} updatePopped={updatePopped} favorites={favorites} updateFavorites={updateFavorites}/>
+      <Popper popped={popped} updatePopped={updatePopped} favorites={favorites} updateFavorites={updateFavorites} />
     </>
   );
 }

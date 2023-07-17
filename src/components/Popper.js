@@ -7,8 +7,12 @@ export function Popper({ popped, updatePopped, favorites, updateFavorites }) {
         updatePopped(false);
     }
 
+    function clearAll() {
+        updateFavorites("clear");
+    }
+
     return (
-        <div className={(popped ? "block " : "hidden ") + "font-poppins w-1/2 max-h-96 overflow-y-scroll bg-white rounded-lg shadow-lg p-6 absolute left-1/4 top-48 mx-auto"}>
+        <div className={(popped ? "block " : "hidden ") + "font-poppins lg:w-1/2 max-h-96 overflow-y-scroll bg-white rounded-lg shadow-lg p-6 m-6 lg:m-0 absolute lg:left-1/4 top-24 md:top-48"}>
             <div className="grid grid-cols-10">
             <h1 className="text-3xl text-asia-trail font-bold">Favorites</h1>
             <button onClick={handleClick} className="col-start-10 text-right px-2.5">
@@ -24,6 +28,7 @@ export function Popper({ popped, updatePopped, favorites, updateFavorites }) {
                     })
                 }
             </ul>
+            <button onClick={clearAll} className="text-asia-trail underline float-right">Clear All</button>
         </div>
     );
 }
