@@ -49,9 +49,9 @@ function App() {
         </header>
         <article>
           <div className="filters text-center">
-            <Select onChange={updateFilterExhibit} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} />
-            <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} />
-            <button onClick={() => updatePopped(true)} className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
+            <Select onChange={updateFilterExhibit} disabled={popped} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} />
+            <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} popped={popped}/>
+            <button onClick={() => updatePopped(true)} disabled={popped} className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
           </div>
 
           <DemoGrid
@@ -59,6 +59,7 @@ function App() {
             sort={sort}
             updateFavorites={updateFavorites}
             favorites={favorites}
+            popped={popped}
           />
 
         </article>

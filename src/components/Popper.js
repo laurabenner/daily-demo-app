@@ -9,6 +9,7 @@ export function Popper({ popped, updatePopped, favorites, updateFavorites }) {
 
     function clearAll() {
         updateFavorites("clear");
+        updatePopped(false);
     }
 
     return (
@@ -23,7 +24,7 @@ export function Popper({ popped, updatePopped, favorites, updateFavorites }) {
                 {
                     favorites.map(favorite => {
                         return (
-                            <FavoriteDemo key={favorite.Time + favorite.Demo} demo={favorite} favorites={favorites} updateFavorites={updateFavorites} />
+                            <FavoriteDemo key={favorite.Time + favorite.Demo} demo={favorite} favorites={favorites} updateFavorites={updateFavorites} popped={popped}/>
                         );
                     })
                 }
