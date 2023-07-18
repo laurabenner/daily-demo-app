@@ -31,7 +31,7 @@ export function Demo({ demo, updateFavorites, favorites }) {
                 <Time time={demo.Time} />
                 <Description description={demo.Demo} />
                 <Star onClick={updateFavorites} demo={demo} favorites={favorites} />
-                <IconBox exhibit={demo.Exhibit} animals={animals} updateAnimal={updateAnimal} showExhibit={true}/>
+                <IconBox exhibit={demo.Exhibit} animals={animals} animalSelected={animal} updateAnimal={updateAnimal} showExhibit={true}/>
             </div>
             {animal && <AnimalDropdown animal={animal} updateAnimal={updateAnimal}/>}
         </div>
