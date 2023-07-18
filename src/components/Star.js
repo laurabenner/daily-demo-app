@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { faStar as regularFaStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solidFaStar } from "@fortawesome/free-solid-svg-icons";
 
-export function Star({ onClick, demo, favorites, popped }) {
+export function Star({ onClick, demo, favorites }) {
     const [favorited, setFavorited] = useState(favorites.includes(demo))
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export function Star({ onClick, demo, favorites, popped }) {
 
     return (
         <div className="col-start-12 col-span-1 row-span-1 text-right px-2.5 text-palette-dark">
-            <button onClick={handleClick} disabled={popped}>
+            <button onClick={handleClick}>
                 {favorited ? <FontAwesomeIcon icon={solidFaStar} /> : <FontAwesomeIcon icon={regularFaStar} />}
             </button>
         </div>

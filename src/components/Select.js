@@ -1,4 +1,4 @@
-export function Select({ onChange, options, popped }) {
+export function Select({ onChange, options }) {
 
     function handleChange(e) {
         onChange(e.target.value);
@@ -7,7 +7,6 @@ export function Select({ onChange, options, popped }) {
     return (
         <select
             className="appearance-none outline-none border-2 w-44 border-palette-brown focus:border-palette-dark rounded-full px-5 py-2.5 m-2 text-palette"
-            disabled={popped}
             onChange={(e) => handleChange(e)}>
             {
                 options.map(option => (

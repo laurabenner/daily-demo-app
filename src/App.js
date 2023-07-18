@@ -40,32 +40,30 @@ function App() {
   }
 
   let blur = popped ? "blur-lg" : "blur-none";
+  let overflow = popped ? " overflow-hidden" : " overflow-scroll";
 
   return (
     <>
-      <div className={"font-poppins h-full " + blur}>
+      <div className={"font-poppins h-screen " + blur + overflow}>
         <header className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom py-4 md:pt-24 md:pb-10">
           <h1 className="text-white text-3xl">Daily Animal Demos</h1>
         </header>
-        <article>
-          <div className="filters text-center">
-            <Select onChange={updateFilterExhibit} disabled={popped} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} />
-            <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} popped={popped}/>
-            <button onClick={() => updatePopped(true)} disabled={popped} className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
-          </div>
+        <div className="filters text-center">
+          <Select onChange={updateFilterExhibit} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} />
+          <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} />
+          <button onClick={() => updatePopped(true)} className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
+        </div>
 
-          <DemoGrid
-            filterExhibit={filterExhibit}
-            sort={sort}
-            updateFavorites={updateFavorites}
-            favorites={favorites}
-            popped={popped}
-          />
-
-        </article>
-
+        <DemoGrid
+          filterExhibit={filterExhibit}
+          sort={sort}
+          updateFavorites={updateFavorites}
+          favorites={favorites}
+        />
         <footer className="m-4"></footer>
       </div>
+
+      {popped && <div className="absolute top-0 left-0 w-screen z-40 blur-lg h-screen"></div>}
 
       <Popper popped={popped} updatePopped={updatePopped} favorites={favorites} updateFavorites={updateFavorites} />
     </>
