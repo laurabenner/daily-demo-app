@@ -17,7 +17,7 @@ export function Star({ onClick, demo, favorites }) {
     };
 
     return (
-        <div className="col-start-12 col-span-1 row-span-1 text-right px-2.5">
+        <div className="col-start-12 col-span-1 row-span-1 text-right px-2.5 text-palette-dark">
             <button onClick={handleClick}>
                 {favorited ? <FontAwesomeIcon icon={solidFaStar} /> : <FontAwesomeIcon icon={regularFaStar} />}
             </button>

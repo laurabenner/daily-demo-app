@@ -44,14 +44,14 @@ function App() {
   return (
     <>
       <div className={"font-poppins " + blur}>
-        <header className="text-center bg-asia-trail py-4 md:pt-24 md:pb-10">
+        <header className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom py-4 md:pt-24 md:pb-10">
           <h1 className="text-white text-3xl">Daily Animal Demos</h1>
         </header>
         <article>
           <div className="filters text-center">
             <Select onChange={updateFilterExhibit} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} />
             <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} />
-            <button onClick={() => updatePopped(true)} className="text-white bg-asia-trail border-2 border-asia-trail rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
+            <button onClick={() => updatePopped(true)} className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
           </div>
 
           <DemoGrid

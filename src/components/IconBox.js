@@ -6,9 +6,6 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { transformExhibitString } from "../utils";
 
 export function IconBox({ animals, exhibit, updateAnimal, showExhibit }) {
-    const darkColorTextClass = "text-" + transformExhibitString(exhibit) + "-dark";
-    const defaultColorTextClass = "text-" + transformExhibitString(exhibit);
-
     function handleClick(animal) {
         updateAnimal(animal);
     }
@@ -17,7 +14,7 @@ export function IconBox({ animals, exhibit, updateAnimal, showExhibit }) {
         <div className={"col-start-4 sm:col-start-3 col-end-13"}>
             {
                 showExhibit &&
-                <p className={"inline-block pr-2 " + defaultColorTextClass}>
+                <p className={"inline-block pr-2 text-palette-dark"}>
                     <FontAwesomeIcon icon={faLocationDot} />
                     <a
                         className={"hover:underline p-2.5"}
@@ -31,7 +28,7 @@ export function IconBox({ animals, exhibit, updateAnimal, showExhibit }) {
             }
             {
                 showExhibit &&
-                <p className="inline-block pr-2 text-gray-400">
+                <p className="inline-block pr-2 text-palette-brown">
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                     <a
                         className={"hover:underline p-2.5"}
@@ -44,7 +41,7 @@ export function IconBox({ animals, exhibit, updateAnimal, showExhibit }) {
             }
             {
                 animals.length > 0 &&
-                <p className={"inline-block pr-2 " + darkColorTextClass}>
+                <p className={"inline-block pr-2 text-palette-dark"}>
                     <FontAwesomeIcon icon={faPaw} />
                     <span className="p-2.5">
                         {animals.map((animal, index) => {

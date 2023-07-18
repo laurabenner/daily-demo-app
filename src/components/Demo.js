@@ -26,7 +26,7 @@ export function Demo({ demo, updateFavorites, favorites }) {
     return (
         <div className="w-11/12 lg:w-4/6 m-2 justify-self-center grid">
             <div
-                className={"demo bg-demo p-4 border rounded-xl border-transparent grid grid-cols-12 gap-y-2.5" + (animal ? " rounded-br-none" : "")}
+                className={"demo bg-demo p-4 shadow-md rounded-xl border-transparent grid grid-cols-12 gap-y-2.5" + (animal ? " rounded-br-none" : "")}
             >
                 <Time time={demo.Time} />
                 <Description description={demo.Demo} />
