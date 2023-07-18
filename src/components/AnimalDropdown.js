@@ -11,8 +11,8 @@ export function AnimalDropdown({ animal, updateAnimal }) {
     }
 
     return (
-        <div className={"justify-self-end hidden md:grid w-10/12 grid-cols-10 p-4 border rounded-b-big shadow-md text-white bg-palette-dark"}>
-            <img className={"w-24 h-24 mr-2.5 col-start-1 col-span-2 row-span-3 justify-self-center border-4 rounded-full object-cover border-palette-light"} src={animal.thumbnail} alt={animal.label}></img>
+        <div className={"justify-self-end hidden md:grid w-11/12 grid-cols-10 p-4 border border-transparent rounded-b-big shadow-md text-white bg-palette-dark"}>
+            <img className={"w-28 h-28 mr-2.5 col-start-1 col-span-2 row-span-3 justify-self-center border-4 rounded-full object-cover border-palette-light"} src={animal.thumbnail} alt={animal.label}></img>
             <p className="px-1 col-start-3 col-end-10 text-lg">{animal.label}</p>
             <button onClick={handleClick} className="col-start-10 text-right px-2.5">
                 <FontAwesomeIcon icon={faXmark} />

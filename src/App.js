@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-      <div className={"font-poppins " + blur}>
+      <div className={"font-poppins h-full " + blur}>
         <header className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom py-4 md:pt-24 md:pb-10">
           <h1 className="text-white text-3xl">Daily Animal Demos</h1>
         </header>

@@ -12,17 +12,3 @@ select {
       1px 1.5em;
   background-repeat: no-repeat;
 }
-
-/**
-@media (min-width: 1024px) {
-  .demo {
-      height: 100px;
-      overflow: hidden;
-      transition: height 0.3s ease;
-  }
-
-  .demo[data-expanded="true"] {
-      height: 280px;
-  }
-}
-*/
