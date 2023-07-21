@@ -1,3 +1,8 @@
+/**
+ * @param {function} onChange Function to occur when select value changes
+ * @param {array} options List of select options 
+ * @returns Select element
+ */
 export function Select({ onChange, options }) {
 
     function handleChange(e) {

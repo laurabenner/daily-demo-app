@@ -2,11 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FavoriteDemo } from "./FavoriteDemo";
 
-export function Popper({ popped, updatePopped, favorites, updateFavorites }) {
+/**
+ * @param {boolean} popped True if pop-up should be displayed
+ * @param {function} updatePopped Function to update popped
+ * @param {array} favorites Favorited demos
+ * @param {function} updateFavorites Function to update favorites
+ * @returns Pop up display of favorited demos
+ */
+export function PopUp({ popped, updatePopped, favorites, updateFavorites }) {
+
+    // When 'X' is clicked, update popped to false
     function handleClick() {
         updatePopped(false);
     }
 
+    // When 'Clear All' is clicked, update favorites to "clear"
     function clearAll() {
         updateFavorites("clear");
     }
@@ -21,12 +31,14 @@ export function Popper({ popped, updatePopped, favorites, updateFavorites }) {
             </div>
             <ul>
                 {favorites.length > 0 ? (
+                    // If there are demos in favorites, render them
                     favorites.map(favorite => {
                         return (
                             <FavoriteDemo key={favorite.Time + favorite.Demo} demo={favorite} favorites={favorites} updateFavorites={updateFavorites} popped={popped} />
                         );
                     })
                 ) : (
+                    // If there are no demos in favorites, render a message
                     <p className="text-center p-2.5">No favorites selected. </p>
                 )
                 }

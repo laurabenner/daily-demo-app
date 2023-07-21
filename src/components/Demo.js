@@ -6,9 +6,18 @@ import { Star } from "./Star";
 import { IconBox } from "./IconBox";
 import { AnimalDropdown } from "./AnimalDropdown";
 
-export function Demo({ demo, updateFavorites, favorites }) {
+/**
+ * @param {object} demo Contains information about the demo to be displayed
+ * @param {function} updateFavorites Function to update the favorites array
+ * @param {array} favorites Favorited demos
+ * @param {boolean} showExhibit True if exhibit should be displayed
+ * @returns Display of demo information
+ */
+export function Demo({ demo, updateFavorites, favorites, showExhibit }) {
+    // Holds state of current animal showing in dropdown
     const [animal, setAnimal] = useState("");
 
+    // Sets animal to empty string if new animal matches current animal; otherwise, sets to new animal
     const updateAnimal = (newAnimal) => {
         if (newAnimal === animal) {
             setAnimal("");
@@ -17,8 +26,8 @@ export function Demo({ demo, updateFavorites, favorites }) {
         }
     }
 
+    // Adds animal data to animal array for each animal involved in the demo
     let animals = [];
-
     for (const animal of demo.Animals) {
         animals.push(findAnimal(animal));
     }
@@ -31,7 +40,7 @@ export function Demo({ demo, updateFavorites, favorites }) {
                 <Time time={demo.Time} />
                 <Description description={demo.Demo} />
                 <Star onClick={updateFavorites} demo={demo} favorites={favorites} />
-                <IconBox exhibit={demo.Exhibit} animals={animals} animalSelected={animal} updateAnimal={updateAnimal} showExhibit={true}/>
+                <IconBox exhibit={demo.Exhibit} animals={animals} animalSelected={animal} updateAnimal={updateAnimal} showExhibit={showExhibit}/>
             </div>
             {animal && <AnimalDropdown animal={animal} updateAnimal={updateAnimal}/>}
         </div>

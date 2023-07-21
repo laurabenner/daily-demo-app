@@ -3,6 +3,12 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { Star } from "./Star";
 
+/**
+ * @param {object} demo Contains information about a scheduled demo
+ * @param {array} favorites Favorited demos
+ * @param {function} updateFavorites Function to update favorites array
+ * @returns Display of demo information
+ */
 export function FavoriteDemo({ demo, favorites, updateFavorites }) {
     return (
         <li className="p-2.5 bg-demo m-2.5 rounded-md shadow-md grid grid-cols-10">
@@ -18,7 +24,6 @@ export function FavoriteDemo({ demo, favorites, updateFavorites }) {
                     <span className="px-1">{demo.Exhibit}</span>
                 </span>
             </div>
-
         </li>
     );
 }

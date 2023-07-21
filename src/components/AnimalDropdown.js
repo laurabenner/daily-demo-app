@@ -6,7 +6,14 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { spliceTags } from "../utils";
 import { cutSentences } from "../utils";
 
+/**
+ * @param {object} animal an object containing animal information
+ * @param {function} updateAnimal function to update the animal state in the Demo component
+ * @returns Dropdown with display of an animal image, name, conservation status, description, and link to read more
+ */
 export function AnimalDropdown({ animal, updateAnimal }) {
+
+    // When 'X' is clicked, update animal to an empty string
     function handleClick() {
         updateAnimal("");
     }
