@@ -77,7 +77,7 @@ export function IconBox({ animals, exhibit, animalSelected, updateAnimal, showEx
 
                             {/*Link is hidden when screen is larger than 768px*/}
                             <a
-                                className="hover:underline px-2.5 inline md:hidden"
+                                className="underline px-2.5 inline md:hidden"
                                 href={animal.path}
                                 target="_blank"
                                 rel="noreferrer"

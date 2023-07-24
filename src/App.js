@@ -59,12 +59,12 @@ function App() {
   return (
     <>
       <div className={"font-poppins h-screen " + blur + overflow}>
-        <header className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom py-4 md:pt-24 md:pb-10">
+        <header className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom py-6 md:pt-24 md:pb-10">
           <h1 className="text-white text-3xl">Daily Animal Demos</h1>
         </header>
         <div className="filters text-center">
-          <Select onChange={updateFilter} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} />
-          <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} />
+          <Select onChange={updateFilter} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} showSmall={false}/>
+          <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} showSmall={true}/>
           <button onClick={() => updatePopped(true)} className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
         </div>
 
