@@ -1,21 +1,29 @@
 import './App.css';
 import { useState } from "react";
+import { useEffect } from 'react';
 import { DemoGrid } from "./components/DemoGrid";
 import { Select } from "./components/Select";
 import { PopUp } from "./components/PopUp";
 
 function App() {
   // Holds state of exhibit filter
-  const [filter, setFilter] = useState("All Exhibits");
+  const [filter, setFilter] = useState('All Exhibits');
 
   // Holds state of sort type
-  const [sort, setSort] = useState("Time");
+  const [sort, setSort] = useState('Time');
 
   // Holds state of pop-up display
   const [popped, setPopped] = useState(false);
 
   // Holds state of favorited demos
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   const updateFilter = (newValue) => {
     setFilter(newValue);
@@ -35,7 +43,12 @@ function App() {
       setFavorites([]);
     } else {
       // Get index of passed demo in favorites array
-      const index = favorites.indexOf(favorite);
+      let index = -1;
+      for (let i = 0; i < favorites.length; i++) {
+        if (favorites[i].Demo === favorite.Demo && favorites[i].Time === favorite.Time && favorites[i].Exhibit === favorite.Exhibit) {
+          index = i;
+        }
+      }
 
       if (index !== -1) {
         // If demo is already in favorites, remove it

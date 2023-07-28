@@ -12,11 +12,26 @@ import { faStar as solidFaStar } from "@fortawesome/free-solid-svg-icons";
  */
 export function Star({ onClick, demo, favorites }) {
     // Holds state of star; initially true if demo is in favorites
-    const [favorited, setFavorited] = useState(favorites.includes(demo))
+    const [favorited, setFavorited] = useState(() => {
+        for (let i = 0; i < favorites.length; i++) {
+            if (favorites[i].Demo === demo.Demo && favorites[i].Time === demo.Time && favorites[i].Exhibit === demo.Exhibit) {
+                return true;
+            }
+        } 
+        return false;
+    })
 
     // If favorites or demo changes, update favorited
     useEffect(() => {
-        setFavorited(favorites.includes(demo));
+        setFavorited(() => {
+            for (let i = 0; i < favorites.length; i++) {
+                if (favorites[i].Demo === demo.Demo && favorites[i].Time === demo.Time && favorites[i].Exhibit === demo.Exhibit) {
+                    return true;
+                }
+            } 
+            return false;
+        });
+        console.log('wow');
     }, [favorites, demo]);
 
     // Call onClick function and adjust state when star icon is clicked
