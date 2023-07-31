@@ -14,10 +14,10 @@ export function Star({ onClick, demo, favorites }) {
     // Holds state of star; initially true if demo is in favorites
     const [favorited, setFavorited] = useState(() => {
         for (let i = 0; i < favorites.length; i++) {
-            if (favorites[i].demo === demo.demo && favorites[i].time === demo.time && favorites[i].exhibit === demo.exhibit) {
+            if (favorites[i].label === demo.label && favorites[i].time === demo.time && favorites[i].exhibit === demo.exhibit) {
                 return true;
             }
-        } 
+        }
         return false;
     })
 
@@ -25,14 +25,14 @@ export function Star({ onClick, demo, favorites }) {
     useEffect(() => {
         setFavorited(() => {
             for (let i = 0; i < favorites.length; i++) {
-                if (favorites[i].demo === demo.demo && favorites[i].time === demo.time && favorites[i].exhibit === demo.exhibit) {
+                if (favorites[i].label === demo.label && favorites[i].time === demo.time && favorites[i].exhibit === demo.exhibit) {
                     return true;
                 }
-            } 
+            }
             return false;
         });
     }, [favorites, demo]);
-
+    
     // Call onClick function and adjust state when star icon is clicked
     const handleClick = () => {
         onClick(demo);

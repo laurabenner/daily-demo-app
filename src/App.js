@@ -45,7 +45,7 @@ function App() {
       // Get index of passed demo in favorites array
       let index = -1;
       for (let i = 0; i < favorites.length; i++) {
-        if (favorites[i].Demo === favorite.Demo && favorites[i].Time === favorite.Time && favorites[i].Exhibit === favorite.Exhibit) {
+        if (favorites[i].label === favorite.label && favorites[i].time === favorite.time && favorites[i].exhibit === favorite.exhibit) {
           index = i;
         }
       }
