@@ -5,6 +5,8 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { transformExhibitString } from "../utils";
+import { spliceTags } from "../utils";
+import { getPointLink } from "../utils";
 
 /**
  * 
@@ -15,7 +17,7 @@ import { transformExhibitString } from "../utils";
  * @param {boolean} showExhibit True if exhibit info should be displayed
  * @returns 
  */
-export function IconBox({ animals, exhibit, animalSelected, updateAnimal, showExhibit }) {
+export function IconBox({ animals, exhibit, location, animalSelected, updateAnimal, showExhibit }) {
 
     // When an animal is clicked, update animal
     function handleClick(animal) {
@@ -35,7 +37,7 @@ export function IconBox({ animals, exhibit, animalSelected, updateAnimal, showEx
                             + transformExhibitString(exhibit).replace("africa-trail", "cheetah-conservation-station")}
                         target="_blank"
                         rel="noreferrer">
-                        {exhibit}
+                        {spliceTags(exhibit)}
                     </a>
                 </p>
             }
@@ -46,7 +48,7 @@ export function IconBox({ animals, exhibit, animalSelected, updateAnimal, showEx
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                     <a
                         className={"underline p-2.5"}
-                        href="google.com/maps"
+                        href={getPointLink(location)}
                         target="_blank"
                         rel="noreferrer">
                         Get directions

@@ -1,4 +1,5 @@
 import { transformExhibitString } from "../utils";
+import { spliceTags } from "../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +20,7 @@ export function ExhibitHeading({ exhibit }) {
                         + transformExhibitString(exhibit).replace("africa-trail", "cheetah-conservation-station")}
                     target="_blank"
                     rel="noreferrer">
-                    {exhibit}
+                    {spliceTags(exhibit)}
                 </a>
             </h2>
             <p className="text-palette-brown mr-2.5 text-base font-normal inline-block sm:float-right">

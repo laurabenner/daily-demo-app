@@ -1,5 +1,3 @@
-import animals from "./animals.json";
-
 /**
  * Transforms a string from 12-hour to 24-hour format
  * @param {String} timeString Time in 12-hour format
@@ -7,8 +5,8 @@ import animals from "./animals.json";
  */
 export function transformTimeString(timeString) {
     return timeString.replace(
-        /(\d+):(\d+) (AM|PM)/,
-        (_, h, m, p) => `${String(p === "PM" ? +h + 12 : h).padStart(2, "0")}:${m}`
+        /(\d+):(\d+) (AM|PM)/i,
+        (_, h, m, p) => `${String(p.toLowerCase() === "pm" ? +h + 12 : h).padStart(2, "0")}:${m}`
     );
 }
 
@@ -26,6 +24,58 @@ export function transformExhibitString(exhibitString) {
         .replaceAll(" & ", "-")
         .replaceAll(" ", "-")
         .replaceAll("'", "");
+}
+
+/**
+ * Replaces HTML tags and entities with their plaintext equivalents
+ * @param {String} string Input string containing HTML tags and entities
+ * @returns Plain text without HTML tags and entities
+ */
+export function spliceTags(string) {
+    let plaintext = string.replace(/&amp;/g, "&")
+        .replace(/&nbsp;/g, " ")
+        .replace(/&quot;/g, '"')
+        .replace(/&apos;/g, "'")
+        .replace(/&#039;/g, "'")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&rsquo;/g, "’")
+        .replace(/<[^>]+>/g, "");
+    return plaintext;
+}
+
+/**
+ * Cuts the input string into two sentences
+ * @param {String} string Input string containing multiple sentences
+ * @returns The first two sentences of the input string
+ */
+export function cutSentences(string) {
+    var pattern = /[^.!?]+[.!?]+/g;
+    var sentences = string.match(pattern);
+    var result = sentences.slice(0, 2).join(' ');
+    return result;
+}
+
+/**
+ * Extracts a Google Maps link from a string containing geo-coordinates in a specific format
+ * @param {String} inputString Input string containing geo-coordinates in the format "POINT (longitude latitude)"
+ * @returns Google Maps link for the given geo-coordinates
+ *          If inputString is not a valid string, returns a default Google Maps link
+ */
+export function getPointLink(inputString) {
+    if (typeof inputString !== 'string') {
+        return "https://www.google.com/maps";
+    }
+
+    const regex = /POINT \(([-+]?\d+\.\d+) ([-+]?\d+\.\d+)\)/;
+    const match = inputString.match(regex);
+
+    const longitude = parseFloat(match[1]);
+    const latitude = parseFloat(match[2]);
+
+    const googleMapsLink = `https://www.google.com/maps/dir//${latitude}+${longitude}/@${latitude},${longitude},18z/data=!4m6!4m5!1m0!1m3!2m2!1d${longitude}!2d${latitude}?entry=ttu`;
+
+    return googleMapsLink;
 }
 
 /**
@@ -56,26 +106,19 @@ export function getAnimalUrl(animal) {
     return url;
 }
 
-export function findAnimal(animal) {
-    return animals.find(thisAnimal => thisAnimal.label === animal);
-}
-
-export function spliceTags(string) {
-    let plaintext = string.replace(/&amp;/g, "&")
-        .replace(/&nbsp;/g, " ")
-        .replace(/&quot;/g, '"')
-        .replace(/&apos;/g, "'")
-        .replace(/&#039;/g, "'")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">")
-        .replace(/&rsquo;/g, "’")
-        .replace(/<[^>]+>/g, "");
-    return plaintext;
-}
-
-export function cutSentences(string) {
-    var pattern = /[^.!?]+[.!?]+/g;
-    var sentences = string.match(pattern);
-    var result = sentences.slice(0, 2).join(' ');
-    return result;
+export function findAnimals(label, exhibit, animalData) {
+    let animals = [];
+    for (const animal of animalData) {
+        if (label.toLowerCase().includes(animal.label.toLowerCase()) 
+            && exhibit.toLowerCase() === animal.exhibit_label.toLowerCase()) {
+            animals.push(animal);
+        }
+    }
+    for (let i = 1; i < animals.length; i++) {
+        if (animals[i - 1].label === animals[i].label) {
+            console.log(animals[i]);
+            animals.splice(i, 1);
+        }
+    }
+    return animals;
 }

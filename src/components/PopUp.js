@@ -34,7 +34,7 @@ export function PopUp({ popped, updatePopped, favorites, updateFavorites }) {
                     // If there are demos in favorites, render them
                     favorites.map(favorite => {
                         return (
-                            <FavoriteDemo key={favorite.Time + favorite.Demo} demo={favorite} favorites={favorites} updateFavorites={updateFavorites} popped={popped} />
+                            <FavoriteDemo key={favorite.time + favorite.label} demo={favorite} favorites={favorites} updateFavorites={updateFavorites} popped={popped} />
                         );
                     })
                 ) : (
