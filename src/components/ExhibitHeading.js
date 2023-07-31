@@ -1,5 +1,6 @@
 import { transformExhibitString } from "../utils";
 import { spliceTags } from "../utils";
+import { getPointLink } from "../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +9,7 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
  * @param {string} exhibit Zoo exhibit
  * @returns Icons and links to exhibit page and map
  */
-export function ExhibitHeading({ exhibit }) {
+export function ExhibitHeading({ exhibit, location }) {
     return (
         <div className={"mt-4 ml-6 w-11/12 lg:w-4/6 justify-self-center text-2xl font-bold"}>
             <h2 className="block sm:inline-block text-palette-dark">
@@ -27,7 +28,7 @@ export function ExhibitHeading({ exhibit }) {
                 <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                 <a
                     className={"underline p-2.5"}
-                    href="https://www.google.com/maps/"
+                    href={getPointLink(location)}
                     target="_blank"
                     rel="noreferrer">
                     Get directions

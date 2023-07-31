@@ -85,7 +85,7 @@ export function DemoGrid({ filter, sort, updateFavorites, favorites }) {
                     return (
                         <Fragment key={demo.time + demo.exhibit}>
                             {/*Conditionally display an exhibit heading*/}
-                            {(lastExhibit !== demo.exhibit && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} />}
+                            {(lastExhibit !== demo.exhibit && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} />}
                             <Demo demo={demo} updateFavorites={updateFavorites} favorites={favorites} showExhibit={!showHeadings} animalData={animalData} />
                         </Fragment>
                     );
