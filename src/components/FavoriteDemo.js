@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { Star } from "./Star";
+import { spliceTags } from "../utils";
 
 /**
  * @param {object} demo Contains information about a scheduled demo
@@ -21,7 +22,7 @@ export function FavoriteDemo({ demo, favorites, updateFavorites }) {
                 </span>
                 <span className="px-2.5 inline-block">
                     <FontAwesomeIcon icon={faLocationDot} />
-                    <span className="px-1">{demo.exhibit}</span>
+                    <span className="px-1">{spliceTags(demo.exhibit)}</span>
                 </span>
             </div>
         </li>

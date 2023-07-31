@@ -116,7 +116,6 @@ export function findAnimals(label, exhibit, animalData) {
     }
     for (let i = 1; i < animals.length; i++) {
         if (animals[i - 1].label === animals[i].label) {
-            console.log(animals[i]);
             animals.splice(i, 1);
         }
     }

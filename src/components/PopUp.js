@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FavoriteDemo } from "./FavoriteDemo";
+import { transformTimeString } from "../utils";
 
 /**
  * @param {boolean} popped True if pop-up should be displayed
@@ -21,6 +22,19 @@ export function PopUp({ popped, updatePopped, favorites, updateFavorites }) {
         updateFavorites("clear");
     }
 
+    // Returns the difference between demoA's time and demoB's time. 
+    function timeSort(demoA, demoB) {
+        const timeA = transformTimeString(demoA.time);
+        const timeB = transformTimeString(demoB.time);
+
+        const dateA = new Date(`1970-01-01T${timeA}`);
+        const dateB = new Date(`1970-01-01T${timeB}`);
+
+        return dateA - dateB;
+    };
+
+    let sortedFavorites = favorites.sort(timeSort);
+
     return (
         <div className={(popped ? "block " : "hidden ") + "font-poppins z-50 lg:w-1/2 max-h-96 overflow-y-scroll bg-white rounded-lg shadow-lg p-6 m-6 lg:m-0 absolute lg:left-1/4 top-24 md:top-48"}>
             <div className="grid grid-cols-10">
@@ -30,9 +44,9 @@ export function PopUp({ popped, updatePopped, favorites, updateFavorites }) {
                 </button>
             </div>
             <ul>
-                {favorites.length > 0 ? (
+                {sortedFavorites.length > 0 ? (
                     // If there are demos in favorites, render them
-                    favorites.map(favorite => {
+                    sortedFavorites.map(favorite => {
                         return (
                             <FavoriteDemo key={favorite.time + favorite.label} demo={favorite} favorites={favorites} updateFavorites={updateFavorites} popped={popped} />
                         );
