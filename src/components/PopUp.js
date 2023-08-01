@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FavoriteDemo } from "./FavoriteDemo";
-import { transformTimeString } from "../utils";
-
+import { timeSort } from "../utils";
 /**
  * @param {boolean} popped True if pop-up should be displayed
  * @param {function} updatePopped Function to update popped
@@ -21,17 +20,6 @@ export function PopUp({ popped, updatePopped, favorites, updateFavorites }) {
     function clearAll() {
         updateFavorites("clear");
     }
-
-    // Returns the difference between demoA's time and demoB's time. 
-    function timeSort(demoA, demoB) {
-        const timeA = transformTimeString(demoA.time);
-        const timeB = transformTimeString(demoB.time);
-
-        const dateA = new Date(`1970-01-01T${timeA}`);
-        const dateB = new Date(`1970-01-01T${timeB}`);
-
-        return dateA - dateB;
-    };
 
     let sortedFavorites = favorites.sort(timeSort);
 

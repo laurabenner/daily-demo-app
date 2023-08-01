@@ -1,7 +1,8 @@
 import { Demo } from "./Demo";
 import { Fragment, useState, useEffect } from "react";
 import { ExhibitHeading } from "./ExhibitHeading";
-import { transformTimeString } from "../utils";
+import { timeSort } from "../utils";
+import { exhibitSort } from "../utils";
 
 /**
  * @param {string} filter Selected exhibit filter
@@ -40,26 +41,6 @@ export function DemoGrid({ filter, sort, updateFavorites, favorites }) {
     function demoFilter(demo) {
         return (demo.exhibit.toLowerCase() === filter.toLowerCase() || filter === "All Exhibits");
     }
-
-    /* Returns an integer indicating whether demoA's exhibit comes alphabetically before, 
-    after, or is equivalent to demoB's exhibit. */
-    function exhibitSort(demoA, demoB) {
-        const exhibitA = demoA.exhibit;
-        const exhibitB = demoB.exhibit;
-
-        return exhibitA.localeCompare(exhibitB);
-    }
-
-    // Returns the difference between demoA's time and demoB's time. 
-    function timeSort(demoA, demoB) {
-        const timeA = transformTimeString(demoA.time);
-        const timeB = transformTimeString(demoB.time);
-
-        const dateA = new Date(`1970-01-01T${timeA}`);
-        const dateB = new Date(`1970-01-01T${timeB}`);
-
-        return dateA - dateB;
-    };
 
     let lastExhibit;
     let currentExhibit = '';

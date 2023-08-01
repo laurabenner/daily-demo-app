@@ -26,6 +26,26 @@ export function transformExhibitString(exhibitString) {
         .replaceAll("'", "");
 }
 
+// Returns the difference between demoA's time and demoB's time. 
+export function timeSort(demoA, demoB) {
+    const timeA = transformTimeString(demoA.time);
+    const timeB = transformTimeString(demoB.time);
+
+    const dateA = new Date(`1970-01-01T${timeA}`);
+    const dateB = new Date(`1970-01-01T${timeB}`);
+
+    return dateA - dateB;
+}
+
+/* Returns an integer indicating whether demoA's exhibit comes alphabetically before, 
+    after, or is equivalent to demoB's exhibit. */
+export function exhibitSort(demoA, demoB) {
+    const exhibitA = demoA.exhibit;
+    const exhibitB = demoB.exhibit;
+
+    return exhibitA.localeCompare(exhibitB);
+}
+
 /**
  * Replaces HTML tags and entities with their plaintext equivalents
  * @param {String} string Input string containing HTML tags and entities
@@ -109,7 +129,7 @@ export function getAnimalUrl(animal) {
 export function findAnimals(label, exhibit, animalData) {
     let animals = [];
     for (const animal of animalData) {
-        if (label.toLowerCase().includes(animal.label.toLowerCase()) 
+        if (label.toLowerCase().includes(animal.label.toLowerCase())
             && exhibit.toLowerCase() === animal.exhibit_label.toLowerCase()) {
             animals.push(animal);
         }
