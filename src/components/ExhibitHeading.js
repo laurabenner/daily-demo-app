@@ -11,7 +11,7 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
  */
 export function ExhibitHeading({ exhibit, location }) {
     return (
-        <div className={"mt-4 ml-6 w-11/12 lg:w-4/6 justify-self-center text-2xl font-bold"}>
+        <div id={spliceTags(exhibit)} className={"mt-4 ml-6 w-11/12 lg:w-4/6 justify-self-center text-2xl font-bold"}>
             <h2 className="block sm:inline-block text-palette-dark">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <a

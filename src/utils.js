@@ -98,6 +98,23 @@ export function getPointLink(inputString) {
     return googleMapsLink;
 }
 
+export function getMarker(location, exhibit) {
+    const marker = {};
+
+    const regex = /POINT \(([-+]?\d+\.\d+) ([-+]?\d+\.\d+)\)/;
+    const match = location.match(regex);
+    let point = [];
+    const longitude = parseFloat(match[1]);
+    const latitude = parseFloat(match[2]);
+    point.push(latitude);
+    point.push(longitude);
+
+    marker.point = point;
+    marker.exhibit = exhibit;
+
+    return marker;
+}
+
 /**
  * Transforms string to uppercase
  * @param {String} animalString Animal string from JSON file
