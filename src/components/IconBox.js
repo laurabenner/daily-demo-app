@@ -1,12 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { transformExhibitString } from "../utils";
-import { spliceTags } from "../utils";
-import { getPointLink } from "../utils";
+import { faCaretDown, faCaretUp, faArrowUpRightFromSquare, faLocationDot, faPaw } from "@fortawesome/free-solid-svg-icons";
+import { spliceTags, getPointLink, transformExhibitString } from "../utils";
 
 /**
  * 
@@ -45,7 +39,9 @@ export function IconBox({ animals, exhibit, location, animalSelected, updateAnim
                 // Conditionally render directions icon and link
                 showExhibit &&
                 <p className="inline-block pr-2 text-palette-brown">
-                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                    <button onClick={() => window.open(getPointLink(location), "_blank")}>
+                        <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                    </button>
                     <a
                         className={"underline p-2.5"}
                         href={getPointLink(location)}
@@ -62,9 +58,9 @@ export function IconBox({ animals, exhibit, location, animalSelected, updateAnim
                     return (
                         <p key={animal.label} className="inline-block pr-2 text-palette-dark">
                             {/*Display caret icon when dropdown click action is in use*/}
-                            <span className="hidden md:inline">
+                            <button className="hidden md:inline" onClick={() => handleClick(animal)}>
                                 {animalSelected === animal ? <FontAwesomeIcon icon={faCaretUp} size="xl" /> : <FontAwesomeIcon icon={faCaretDown} size="xl" />}
-                            </span>
+                            </button>
 
                             {/*Display paw icon when link is in use*/}
                             <span className="inline md:hidden"><FontAwesomeIcon icon={faPaw} /></span>

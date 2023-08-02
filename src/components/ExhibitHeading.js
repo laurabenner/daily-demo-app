@@ -25,7 +25,9 @@ export function ExhibitHeading({ exhibit, location }) {
                 </a>
             </h2>
             <p className="text-palette-brown mr-2.5 text-base font-normal inline-block sm:float-right">
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                <button onClick={() => window.open(getPointLink(location), "_blank")}>
+                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                </button>
                 <a
                     className={"underline p-2.5"}
                     href={getPointLink(location)}

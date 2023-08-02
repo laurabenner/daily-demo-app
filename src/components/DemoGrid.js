@@ -14,30 +14,22 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
  * @param {array} favorites Favorited demos
  * @returns Grid of Demo and ExhibitHeading components
  */
-export function DemoGrid({ filter, sort, updateFavorites, favorites }) {
+export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
     const [demoData, setDemoData] = useState([]);
     const [animalData, setAnimalData] = useState([]);
 
     useEffect(() => {
-        fetch('https://dev-national-zoo.pantheonsite.io/api/demos/')
-            .then(response => response.json())
-            .then(data => {
-                setDemoData(data);
+        Promise.all([
+            fetch('https://dev-national-zoo.pantheonsite.io/api/demos/').then(response => response.json()),
+            fetch('https://dev-national-zoo.pantheonsite.io/api/animals').then(response => response.json())
+        ])
+            .then(([demoData, animalData]) => {
+                setDemoData(demoData);
+                setAnimalData(animalData);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, []);
-
-    useEffect(() => {
-        fetch('https://dev-national-zoo.pantheonsite.io/api/animals')
-            .then(response => response.json())
-            .then(data => {
-                setAnimalData(data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            })
     }, []);
 
     // Returns true if the demo's exhibit matches the filter, or if the filter is set to all exhibits
@@ -45,12 +37,9 @@ export function DemoGrid({ filter, sort, updateFavorites, favorites }) {
         return (spliceTags(demo.exhibit.toLowerCase()) === filter.toLowerCase() || filter === "All Exhibits");
     }
 
-    let lastExhibit;
-    let currentExhibit = '';
+    // Sort and filter demos
     let filteredDemos = [];
     let showHeadings;
-
-    // Sort and filter demos
     if (sort === 'Sort By Exhibit') {
         filteredDemos = demoData.sort(exhibitSort).filter(demoFilter);
         showHeadings = true;
@@ -73,44 +62,51 @@ export function DemoGrid({ filter, sort, updateFavorites, favorites }) {
         }
     }
 
+    let lastExhibit;
+
     return (
         <section className="grid">
-            {showHeadings && <div className="h-64 w-3/4 m-8 justify-self-center shadow-lg">
-                <MapContainer style={{ width: "100%", height: "100%" }} center={[38.93, -77.05]} zoom={16} scrollWheelZoom={false}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    {markers.map(marker => {
+            {
+                showHeadings &&
+                <div className="h-64 w-11/12 m-2 mb-6 justify-self-center shadow-lg">
+                    <MapContainer style={{ width: "100%", height: "100%" }} center={[38.93, -77.05]} zoom={16} scrollWheelZoom={false}>
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        {markers.map(marker => {
+                            return (
+                                <Marker key={marker.point} position={marker.point}>
+                                    <Popup>
+                                        {marker.exhibit}
+                                        <br></br>
+                                        <a href={'#' + marker.exhibit}>See demos</a>
+                                    </Popup>
+                                </Marker>
+                            );
+                        })}
+                    </MapContainer>
+                </div>
+            }
+            {
+                filteredDemos.length > 0 ? (
+                    // If any demos pass through the filter, render them
+                    filteredDemos.map(demo => {
+                        let newSection = lastExhibit !== demo.exhibit;
+                        lastExhibit = demo.exhibit;
                         return (
-                            <Marker key={marker.point} position={marker.point}>
-                                <Popup>
-                                    {marker.exhibit}
-                                    <br></br>
-                                    <a href={'#' + marker.exhibit}>See demos</a>
-                                </Popup>
-                            </Marker>
+                            <Fragment key={demo.time + demo.exhibit}>
+                                {/*Conditionally display an exhibit heading*/}
+                                {(newSection && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} />}
+                                <Demo demo={demo} updateFavorites={updateFavorites} favorites={favorites} showExhibit={!showHeadings} animalData={animalData} />
+                            </Fragment>
                         );
-                    })}
-                </MapContainer>
-            </div>}
-            {filteredDemos.length > 0 ? (
-                // If any demos pass through the filter, render them
-                filteredDemos.map(demo => {
-                    lastExhibit = currentExhibit;
-                    currentExhibit = demo.exhibit;
-                    return (
-                        <Fragment key={demo.time + demo.exhibit}>
-                            {/*Conditionally display an exhibit heading*/}
-                            {(lastExhibit !== demo.exhibit && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} />}
-                            <Demo demo={demo} updateFavorites={updateFavorites} favorites={favorites} showExhibit={!showHeadings} animalData={animalData} />
-                        </Fragment>
-                    );
-                })
-            ) : (
-                // If no demos pass through the filter, render a message
-                <p className="text-center pt-4">Sorry, no demos in this exhibit today.</p>
-            )}
+                    })
+                ) : (
+                    // If no demos pass through the filter, render a message
+                    <p className="text-center pt-4">Sorry, no demos in this exhibit today.</p>
+                )
+            }
         </section>
     );
 }

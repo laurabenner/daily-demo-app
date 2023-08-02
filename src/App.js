@@ -1,59 +1,49 @@
 import './App.css';
-import { useState } from "react";
-import { useEffect } from 'react';
+import { useState, useEffect, useCallback } from "react";
 import { DemoGrid } from "./components/DemoGrid";
 import { Select } from "./components/Select";
 import { PopUp } from "./components/PopUp";
 
+// Constants for exhibit and sort options
+const EXHIBIT_OPTIONS = ["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"];
+const SORT_OPTIONS = ["Sort By Time", "Sort By Exhibit"];
+
 function App() {
-  // Holds state of exhibit filter
   const [filter, setFilter] = useState('All Exhibits');
+  const updateFilter = useCallback((newValue) => {
+    setFilter(newValue);
+  }, []);
 
-  // Holds state of sort type
   const [sort, setSort] = useState('Time');
+  const updateSort = useCallback((newValue) => {
+    setSort(newValue);
+  }, []);
 
-  // Holds state of pop-up display
   const [popped, setPopped] = useState(false);
+  const updatePopped = useCallback((newValue) => {
+    setPopped(newValue);
+  }, []);
 
-  // Holds state of favorited demos
   const [favorites, setFavorites] = useState(() => {
     const storedFavorites = localStorage.getItem('favorites');
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
-
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  const updateFilter = (newValue) => {
-    setFilter(newValue);
-  };
-
-  const updateSort = (newValue) => {
-    setSort(newValue);
-  };
-
-  const updatePopped = (newValue) => {
-    setPopped(newValue);
-  }
-
-  const updateFavorites = (favorite) => {
-    // Reset favorites 
+  const updateFavorites = useCallback((favorite) => {
+    // Reset favorites
     if (favorite === "clear") {
       setFavorites([]);
     } else {
       // Get index of passed demo in favorites array
-      let index = -1;
-      for (let i = 0; i < favorites.length; i++) {
-        if (favorites[i].label === favorite.label && favorites[i].time === favorite.time && favorites[i].exhibit === favorite.exhibit) {
-          index = i;
-        }
-      }
+      const index = favorites.findIndex(
+        (f) =>
+          f.label === favorite.label &&
+          f.time === favorite.time &&
+          f.exhibit === favorite.exhibit
+      );
 
       if (index !== -1) {
         // If demo is already in favorites, remove it
-        const updatedFavorites = [...favorites];
-        updatedFavorites.splice(index, 1);
+        const updatedFavorites = favorites.filter((_, i) => i !== index);
         setFavorites(updatedFavorites);
       } else {
         // If demo is not yet in favorites, add it
@@ -61,36 +51,32 @@ function App() {
         setFavorites(updatedFavorites);
       }
     }
-  };
+  }, [favorites]);
 
-  // If popped is true, blur the background
-  let blur = popped ? "blur-lg" : "blur-none";
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
-  // If popped is true, disable page scroll
-  let overflow = popped ? " overflow-hidden" : " overflow-scroll";
+  const blurClass = popped ? "blur-lg" : "blur-none";
+  const overflowClass = popped ? "overflow-hidden" : "overflow-scroll";
 
   return (
     <>
-      <div className={"font-poppins scroll-smooth h-screen " + blur + overflow}>
+      <div className={`font-poppins scroll-smooth h-screen ${blurClass} ${overflowClass}`}>
         <header className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom py-6 md:pt-24 md:pb-10">
           <h1 className="text-white text-3xl">Daily Animal Demos</h1>
         </header>
         <div className="filters text-center">
-          <Select onChange={updateFilter} options={["All Exhibits", "Africa Trail", "Amazonia", "American Bison", "American Trail", "Asia Trail", "Bird House", "Claws & Paws Pathway", "Elephant Trails", "Great Cats", "Kids' Farm", "Primates", "Reptile Discovery Center", "Small Mammal House"]} showSmall={false} />
-          <Select onChange={updateSort} options={["Sort By Time", "Sort By Exhibit"]} showSmall={true} />
-          <button onClick={() => updatePopped(true)} className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2">{"Favorites (" + favorites.length + ")"} </button>
+          <Select onChange={updateFilter} options={EXHIBIT_OPTIONS} showSmall={false} />
+          <Select onChange={updateSort} options={SORT_OPTIONS} showSmall={true} />
+          <button className="text-palette border-2 border-palette-brown rounded-full px-5 py-2.5 m-2" onClick={() => updatePopped(true)}>
+            {`Favorites (${favorites.length})`}
+          </button>
         </div>
-
-        <DemoGrid
-          filter={filter}
-          sort={sort}
-          updateFavorites={updateFavorites}
-          favorites={favorites}
-        />
+        <DemoGrid filter={filter} sort={sort} favorites={favorites} updateFavorites={updateFavorites} />
         <footer className="m-4"></footer>
       </div>
 
-      {/*If popped is true, create overlay over page content to disable clicking outside the pop-up*/}
       {popped && <div className="absolute top-0 left-0 w-screen z-40 h-screen"></div>}
 
       <PopUp popped={popped} updatePopped={updatePopped} favorites={favorites} updateFavorites={updateFavorites} />
@@ -99,3 +85,4 @@ function App() {
 }
 
 export default App;
+
