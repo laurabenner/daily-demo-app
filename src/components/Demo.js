@@ -30,7 +30,7 @@ export function Demo({ demo, updateFavorites, favorites, showExhibit, animalData
     let animals = findAnimals(demo.label, demo.exhibit, animalData);
 
     return (
-        <div className="w-11/12 lg:w-4/6 m-2 justify-self-center grid">
+        <div className="m-4 grid">
             <div
                 className={"demo bg-demo p-4 shadow-md rounded-xl border-transparent grid grid-cols-12 gap-y-2.5" + (animal ? " rounded-br-none" : "")}
             >
