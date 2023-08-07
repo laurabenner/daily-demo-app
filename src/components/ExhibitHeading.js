@@ -13,7 +13,7 @@ export function ExhibitHeading({ exhibit, location, mapView }) {
     const directionsClass = mapView ? "xl:float-right" : "inline-block sm:float-right";
 
     return (
-        <div id={spliceTags(exhibit)} className={"mt-4 ml-6 w-11/12 text-2xl font-bold"}>
+        <div id={spliceTags(exhibit)} className={"mt-4 ml-6 text-2xl font-bold"}>
             <h2 className="block sm:inline-block text-palette-dark">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <a

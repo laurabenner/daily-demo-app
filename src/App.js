@@ -90,10 +90,10 @@ function App() {
         <div className="text-center">
           <Select onChange={updateFilter} options={EXHIBIT_OPTIONS} showSmall={false} />
           <Select onChange={updateSort} options={SORT_OPTIONS} showSmall={true} />
-          <button onClick={() => updateSort('Sort By Time')} className={`lg:inline hidden border-2 border-palette rounded-l-full px-5 py-2.5 ml-2 my-0 ${timeButtonClass}`}>Sort By Time</button>
-          <button onClick={() => updateSort('Sort By Exhibit')} className={`lg:inline hidden border-y-2 border-palette px-5 py-2.5 my-0 ${exhibitButtonClass}`}>Sort By Exhibit</button>
-          <button onClick={() => updateSort('Map View')} className={`lg:inline hidden border-2 border-l-none border-palette rounded-r-full px-5 py-2.5 mr-2 my-0 ${mapButtonClass}`}>Map View</button>
-          <button className="text-palette bg-white border-2 border-palette rounded-full px-5 py-2.5 m-2" onClick={() => updatePopped(true)}>
+          <button onClick={() => updateSort('Sort By Time')} className={`lg:inline shadow-md hidden border-2 border-palette rounded-l-full px-5 py-2.5 ml-2 my-0 ${timeButtonClass}`}>Sort By Time</button>
+          <button onClick={() => updateSort('Sort By Exhibit')} className={`lg:inline shadow-md hidden border-y-2 border-palette px-5 py-2.5 my-0 ${exhibitButtonClass}`}>Sort By Exhibit</button>
+          <button onClick={() => updateSort('Map View')} className={`lg:inline hidden shadow-md border-2 border-l-none border-palette rounded-r-full px-5 py-2.5 mr-2 my-0 ${mapButtonClass}`}>Map View</button>
+          <button className="text-palette bg-white border-2 border-palette shadow-md rounded-full px-5 py-2.5 m-2" onClick={() => updatePopped(true)}>
             {`Favorites (${favorites.length})`}
           </button>
         </div>
