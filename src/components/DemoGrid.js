@@ -17,6 +17,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
     const [demoData, setDemoData] = useState([]);
     const [animalData, setAnimalData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         Promise.all([
@@ -26,6 +27,7 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
             .then(([demoData, animalData]) => {
                 setDemoData(demoData);
                 setAnimalData(animalData);
+                setIsLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -72,9 +74,10 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
     let lastExhibit;
 
     return (
-        <section className={"grid " + (showMap ? "grid-cols-2" : "")}>
+        !isLoading &&
+        <section id="demogrid" className={"grid " + (showMap ? "grid-cols-2 flex-grow overflow-y-scroll" : "")}>
             {
-                <div className={"justify-self-center " + (showMap ? "col-start-1 h-[65vh] w-full overflow-scroll scroll-smooth mt-4" : "w-11/12 lg:w-4/6")}>
+                <div id="demos" className={"justify-self-center " + (showMap ? "col-start-1 w-full overflow-y-scroll scroll-smooth " : "w-11/12 lg:w-4/6")}>
                     {filteredDemos.length > 0 ? (
                         // If any demos pass through the filter, render them
                         filteredDemos.map(demo => {
@@ -96,7 +99,7 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
             }
             {
                 showMap &&
-                <div className="col-start-2 w-full h-[65vh] mt-4">
+                <div id="map" className="col-start-2 w-full">
                     <MapContainer style={{ width: "100%", height: "100%" }} center={[38.93, -77.05]} zoom={16} scrollWheelZoom={false}>
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
