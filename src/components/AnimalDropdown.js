@@ -23,7 +23,8 @@ export function AnimalDropdown({ animal, updateAnimal }) {
             <img className={"w-28 h-28 mr-2.5 col-start-1 col-span-2 row-span-3 justify-self-center border-4 rounded-full object-cover border-palette-light"} src={animal.thumbnail} alt={animal.label}></img>
             <p className="px-1 col-start-3 col-end-10 text-lg">
                 <FontAwesomeIcon icon={faPaw} />
-                {" " + animal.label}
+                {" " + animal.label + " "}
+                <i className="text-sm">{"(" + animal.genus_and_species + ")"}</i>
             </p>
             <button onClick={handleClick} className="col-start-10 text-right px-2.5">
                 <FontAwesomeIcon icon={faXmark} />
