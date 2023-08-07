@@ -9,7 +9,9 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
  * @param {string} exhibit Zoo exhibit
  * @returns Icons and links to exhibit page and map
  */
-export function ExhibitHeading({ exhibit, location }) {
+export function ExhibitHeading({ exhibit, location, mapView }) {
+    const directionsClass = mapView ? "xl:float-right" : "inline-block sm:float-right";
+
     return (
         <div id={spliceTags(exhibit)} className={"mt-4 ml-6 w-11/12 text-2xl font-bold"}>
             <h2 className="block sm:inline-block text-palette-dark">
@@ -24,7 +26,7 @@ export function ExhibitHeading({ exhibit, location }) {
                     {spliceTags(exhibit)}
                 </a>
             </h2>
-            <p className="text-palette-brown mr-2.5 text-base font-normal inline-block sm:float-right">
+            <p className={`text-palette-brown mr-2.5 text-base font-normal ${directionsClass}`}>
                 <button onClick={() => window.open(getPointLink(location), "_blank")}>
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                 </button>

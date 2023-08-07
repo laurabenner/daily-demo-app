@@ -58,6 +58,7 @@ function App() {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
+  // Reload page if window width passes the threshold
   useEffect(() => {
     const handleResize = () => {
       const newWindowWidth = window.innerWidth;
@@ -82,11 +83,11 @@ function App() {
 
   return (
     <>
-      <div id="container" className={`flex flex-col h-screen font-poppins ${blurClass} ${overflowClass}`}>
-        <header id="header" className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom p-4 md:p-16 flex justify-center">
+      <div className={`flex flex-col h-screen font-poppins ${blurClass} ${overflowClass}`}>
+        <header className="text-center bg-[url('../peru-forest-aerial.jpg')] bg-cover bg-bottom p-4 md:p-8 xl:p-16 flex justify-center">
           <h1 className="text-white text-3xl self-center">Daily Animal Demos</h1>
         </header>
-        <div id="filters" className="text-center">
+        <div className="text-center">
           <Select onChange={updateFilter} options={EXHIBIT_OPTIONS} showSmall={false} />
           <Select onChange={updateSort} options={SORT_OPTIONS} showSmall={true} />
           <button onClick={() => updateSort('Sort By Time')} className={`lg:inline hidden border-2 border-palette rounded-l-full px-5 py-2.5 ml-2 my-0 ${timeButtonClass}`}>Sort By Time</button>
@@ -97,7 +98,7 @@ function App() {
           </button>
         </div>
         <DemoGrid filter={filter} sort={sort} favorites={favorites} updateFavorites={updateFavorites} />
-        <footer id="footer" className="m-2"></footer>
+        <footer className="m-2"></footer>
       </div>
 
       {popped && <div className="absolute top-0 left-0 w-screen z-40 h-screen"></div>}

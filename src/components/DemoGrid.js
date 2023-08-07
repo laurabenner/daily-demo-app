@@ -75,9 +75,9 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
 
     return (
         !isLoading &&
-        <section id="demogrid" className={"grid " + (showMap ? "grid-cols-2 flex-grow overflow-y-scroll" : "")}>
+        <section className={"grid " + (showMap ? "grid-cols-2 flex-grow overflow-y-scroll" : "")}>
             {
-                <div id="demos" className={"justify-self-center " + (showMap ? "col-start-1 w-full overflow-y-scroll scroll-smooth " : "w-11/12 lg:w-4/6")}>
+                <div className={"justify-self-center " + (showMap ? "col-start-1 w-full overflow-y-scroll scroll-smooth " : "w-11/12 lg:w-4/6")}>
                     {filteredDemos.length > 0 ? (
                         // If any demos pass through the filter, render them
                         filteredDemos.map(demo => {
@@ -86,7 +86,7 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
                             return (
                                 <Fragment key={demo.time + demo.exhibit}>
                                     {/*Conditionally display an exhibit heading*/}
-                                    {(newSection && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} />}
+                                    {(newSection && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} mapView={showMap}/>}
                                     <Demo demo={demo} updateFavorites={updateFavorites} favorites={favorites} showExhibit={!showHeadings} animalData={animalData} />
                                 </Fragment>
                             );
@@ -99,7 +99,7 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
             }
             {
                 showMap &&
-                <div id="map" className="col-start-2 w-full">
+                <div className="col-start-2 w-full">
                     <MapContainer style={{ width: "100%", height: "100%" }} center={[38.93, -77.05]} zoom={16} scrollWheelZoom={false}>
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
