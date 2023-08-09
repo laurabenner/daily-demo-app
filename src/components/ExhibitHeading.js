@@ -6,10 +6,14 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 /**
- * @param {string} exhibit Zoo exhibit
- * @returns Icons and links to exhibit page and map
+ * Component for displaying exhibit heading with icons and links to exhibit page and map.
+ * @param {string} exhibit - Zoo exhibit
+ * @param {string} location - Location of the exhibit
+ * @param {boolean} mapView - Flag indicating if map view is enabled
+ * @returns JSX element containing exhibit heading
  */
 export function ExhibitHeading({ exhibit, location, mapView }) {
+    // Determine Tailwind CSS classes based on mapView prop
     const directionsClass = mapView ? "xl:float-right" : "inline-block sm:float-right";
 
     return (
@@ -18,7 +22,6 @@ export function ExhibitHeading({ exhibit, location, mapView }) {
                 <FontAwesomeIcon icon={faLocationDot} />
                 <a
                     className={"underline pl-2"}
-                    // Link to zoo exhibit page
                     href={"https://nationalzoo.si.edu/animals/exhibits/"
                         + transformExhibitString(exhibit).replace("africa-trail", "cheetah-conservation-station")}
                     target="_blank"

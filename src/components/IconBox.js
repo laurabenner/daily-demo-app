@@ -11,11 +11,11 @@ import { spliceTags, getPointLink, transformExhibitString } from "../utils";
  * @param {boolean} showExhibit True if exhibit info should be displayed
  * @returns 
  */
-export function IconBox({ animals, exhibit, location, animalSelected, updateAnimal, showExhibit }) {
+export function IconBox({ animals, exhibit, location, animalSelected, updateAnimalSelected, showExhibit }) {
 
     // When an animal is clicked, update animal
     function handleClick(animal) {
-        updateAnimal(animal);
+        updateAnimalSelected(animal);
     }
 
     return (

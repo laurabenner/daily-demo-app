@@ -10,7 +10,7 @@ import { faStar as solidFaStar } from "@fortawesome/free-solid-svg-icons";
  * @param {array} favorites Favorited demos
  * @returns Star button
  */
-export function Star({ onClick, demo, favorites }) {
+export function Star({ demo, favorites, updateFavorites }) {
     // Holds state of star; initially true if demo is in favorites
     const [favorited, setFavorited] = useState(() => {
         for (let i = 0; i < favorites.length; i++) {
@@ -35,7 +35,7 @@ export function Star({ onClick, demo, favorites }) {
     
     // Call onClick function and adjust state when star icon is clicked
     const handleClick = () => {
-        onClick(demo);
+        updateFavorites(demo);
         setFavorited(!favorited);
     };
 

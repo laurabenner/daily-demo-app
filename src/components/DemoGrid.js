@@ -15,10 +15,16 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
  * @returns Grid of Demo and ExhibitHeading components
  */
 export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
+    // Holds demo data in state
     const [demoData, setDemoData] = useState([]);
+
+    // Holds animal data in state
     const [animalData, setAnimalData] = useState([]);
+
+    // True if data is loading
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fetches demo and animal data and sets state
     useEffect(() => {
         Promise.all([
             fetch('https://dev-national-zoo.pantheonsite.io/api/demos/').then(response => response.json()),
@@ -87,7 +93,7 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
                                 <Fragment key={demo.time + demo.exhibit}>
                                     {/*Conditionally display an exhibit heading*/}
                                     {(newSection && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} mapView={showMap}/>}
-                                    <Demo demo={demo} updateFavorites={updateFavorites} favorites={favorites} showExhibit={!showHeadings} animalData={animalData} />
+                                    <Demo demo={demo} favorites={favorites} updateFavorites={updateFavorites} showExhibit={!showHeadings} animalData={animalData} />
                                 </Fragment>
                             );
                         })
