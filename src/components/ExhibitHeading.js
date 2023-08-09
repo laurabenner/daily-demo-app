@@ -12,9 +12,9 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
  * @param {boolean} mapView - Flag indicating if map view is enabled
  * @returns JSX element containing exhibit heading
  */
-export function ExhibitHeading({ exhibit, location, mapView }) {
+export function ExhibitHeading({ exhibit, location, showMap }) {
     // Determine Tailwind CSS classes based on mapView prop
-    const directionsClass = mapView ? "xl:float-right" : "inline-block sm:float-right";
+    const directionsClass = showMap ? "xl:float-right" : "inline-block sm:float-right";
 
     return (
         <div id={spliceTags(exhibit)} className={"mt-4 ml-6 text-2xl font-bold"}>

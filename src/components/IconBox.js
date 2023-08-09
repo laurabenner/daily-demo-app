@@ -11,12 +11,15 @@ import { spliceTags, getPointLink, transformExhibitString } from "../utils";
  * @param {boolean} showExhibit True if exhibit info should be displayed
  * @returns 
  */
-export function IconBox({ animals, exhibit, location, animalSelected, updateAnimalSelected, showExhibit }) {
+export function IconBox({ animals, exhibit, location, animalSelected, updateAnimalSelected, showExhibit, showMap }) {
 
     // When an animal is clicked, update animal
     function handleClick(animal) {
         updateAnimalSelected(animal);
     }
+
+    let buttonClass = showMap ? "hidden" : "hidden md:inline";
+    let linkClass = showMap ? "inline" : "inline md:hidden";
 
     return (
         <div className={"col-start-4 sm:col-start-3 col-end-13"}>
@@ -58,24 +61,24 @@ export function IconBox({ animals, exhibit, location, animalSelected, updateAnim
                     return (
                         <p key={animal.label} className="inline-block pr-2 text-palette-dark">
                             {/*Display caret icon when dropdown click action is in use*/}
-                            <button className="hidden md:inline" onClick={() => handleClick(animal)}>
+                            <button className={buttonClass} onClick={() => handleClick(animal)}>
                                 {animalSelected === animal ? <FontAwesomeIcon icon={faCaretUp} size="xl" /> : <FontAwesomeIcon icon={faCaretDown} size="xl" />}
                             </button>
 
                             {/*Display paw icon when link is in use*/}
-                            <span className="inline md:hidden"><FontAwesomeIcon icon={faPaw} /></span>
+                            <span className={linkClass}><FontAwesomeIcon icon={faPaw} /></span>
 
                             {/*Button is hidden when screen is smaller than 768px*/}
                             <button
                                 onClick={() => handleClick(animal)}
-                                className="px-2.5 hidden md:inline"
+                                className={`px-2.5 ${buttonClass}`}
                             >
                                 {animal.label}
                             </button>
 
                             {/*Link is hidden when screen is larger than 768px*/}
                             <a
-                                className="underline px-2.5 inline md:hidden"
+                                className={`underline px-2.5 ${linkClass}`}
                                 href={animal.path}
                                 target="_blank"
                                 rel="noreferrer"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { findAnimals } from "../utils";
 import { Time } from "./Time";
 import { Description } from "./Description";
@@ -15,7 +15,7 @@ import { AnimalDropdown } from "./AnimalDropdown";
  * @param {array} animalData - Array of animal data
  * @returns JSX element containing demo information
  */
-export function Demo({ demo, favorites, updateFavorites, showExhibit, animalData }) {
+export function Demo({ demo, favorites, updateFavorites, sort, showExhibit, showMap, animalData }) {
     // State of current animal showing in dropdown
     const [animalSelected, setAnimalSelected] = useState("");
 
@@ -28,6 +28,12 @@ export function Demo({ demo, favorites, updateFavorites, showExhibit, animalData
         }
     }
 
+    useEffect(() => {
+        if (sort === "Map View") {
+            setAnimalSelected("");
+        }
+    }, [sort]);
+
     // Populate animals array with animals mentioned in demo label
     let animals = findAnimals(demo.label, demo.exhibit, animalData);
 
@@ -39,7 +45,7 @@ export function Demo({ demo, favorites, updateFavorites, showExhibit, animalData
                 <Time time={demo.time} />
                 <Description description={demo.label} />
                 <Star demo={demo} favorites={favorites} updateFavorites={updateFavorites} />
-                <IconBox exhibit={demo.exhibit} location={demo.location} animals={animals} animalSelected={animalSelected} updateAnimalSelected={updateAnimalSelected} showExhibit={showExhibit}/>
+                <IconBox exhibit={demo.exhibit} location={demo.location} animals={animals} animalSelected={animalSelected} updateAnimalSelected={updateAnimalSelected} showExhibit={showExhibit} showMap={showMap}/>
             </div>
             {animalSelected && <AnimalDropdown animalSelected={animalSelected} updateAnimalSelected={updateAnimalSelected}/>}
         </div>

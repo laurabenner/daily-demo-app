@@ -92,8 +92,8 @@ export function DemoGrid({ filter, sort, favorites, updateFavorites }) {
                             return (
                                 <Fragment key={demo.time + demo.exhibit}>
                                     {/*Conditionally display an exhibit heading*/}
-                                    {(newSection && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} mapView={showMap}/>}
-                                    <Demo demo={demo} favorites={favorites} updateFavorites={updateFavorites} showExhibit={!showHeadings} animalData={animalData} />
+                                    {(newSection && showHeadings) && <ExhibitHeading exhibit={demo.exhibit} location={demo.location} showMap={showMap}/>}
+                                    <Demo demo={demo} favorites={favorites} updateFavorites={updateFavorites} sort={sort} showExhibit={!showHeadings} showMap={showMap} animalData={animalData} />
                                 </Fragment>
                             );
                         })
